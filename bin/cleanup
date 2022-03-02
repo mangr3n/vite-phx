@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# kill -KILL $(ps aux | grep vite | awk '{print $2}' | wc -l)
+function process_count {
+ ps aux | grep vite | awk '{print $2}' | wc -l
+}
+
+function kill_last {
+  kill -KILL $(ps aux | grep vite | awk '{print $2}' | tail -1)
+}
+
+while [ $(process_count) -gt 1 ]
+do
+  kill_last
+done
+
+

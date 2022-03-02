@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+mix deps.get --only prod
+MIX_ENV=prod mix compile
+
+cd assets_new && npm install; cd ..
+
+cd assets_new && yarn build; cd ..
+
+mv priv/static/manifest.json priv/static/cache_manifest.json
+MIX_ENV=prod mix release --overwrite 
